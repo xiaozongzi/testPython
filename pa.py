@@ -22,3 +22,4 @@ r = requests.post(ajax_url, headers=headers, data=post_param)
 result = json.loads(r.text)
 for item in result["content"]["positionResult"]["result"]:
     print(item)
+    # print(item['companyId'])

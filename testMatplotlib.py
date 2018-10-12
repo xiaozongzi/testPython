@@ -17,7 +17,7 @@ import numpy as np
 # plt.show()
 
 n = np.linspace(1, 100, 100)
-y = (np.add(1, np.true_divide(1, n))) **n
+y = (np.add(1, np.true_divide(1, n))) ** n
 plt.plot(n, y, 'b--', label='$\ n (1 + 1/n)^n$')
 plt.legend()
 plt.show()
