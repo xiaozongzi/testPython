@@ -50,7 +50,7 @@ class weixin_spider:
 
     def get_search_result_by_kw(self):
         self.log('搜索地址为：%s' % self.sogou_search_url)
-        return self.s.get(self.sogou_search_url, headers=self.headers, timeout=random.randint(0, 5)).content
+        return self.s.get(self.sogou_search_url, headers=get_headers(), timeout=3).content
 
     def get_wx_url_by_sougou_search_html(self, sougou_search_html):
         ' 根据返回sougou_search_html，从中获取公众号主页链接 '
@@ -104,7 +104,7 @@ class weixin_spider:
         self.log('发表时间为： %s' % date)
         pic = self.parse_cover_pic(article)
         content = self.parse_content_by_url(url).html()
-
+        # data=content('')
         contentfiletitle = self.kw + '/' + title + '_' + date + '.html'
         self.save_content_file(contentfiletitle, content)
 
@@ -134,8 +134,8 @@ class weixin_spider:
 
     def save_content_file(self, title, content):
         ' 页面内容写入文件 '
-        with open(title, 'w') as f:
-            f.write(content.encode("gbk", 'ignore').decode("gbk", "ignore"))
+        with open(title, 'w', encoding="utf-8") as f:
+            f.write(content)
 
     def save_file(self, content):
         ' 数据写入文件 '
