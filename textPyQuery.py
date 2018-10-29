@@ -26,6 +26,8 @@ def getData():
 
 
 # print(section)
+list = {}
+
 for item in section.items():
     name = item('p')(
         '[style="padding-right: 20px;padding-left: 20px;font-size: 16px;color: inherit;border-color: rgb(166, 91, 203);"]').text()
@@ -33,24 +35,29 @@ for item in section.items():
     print(name)
     first = p.eq(0)
     s = first.text()
-
-    print(s)
+    # print(s)
     if s.__contains__('：'):
-        print(s[s.index('：') + 1:])
+        # print(s[s.index('：') + 1:])
         data = getData()
-        print(data)
+        data = sorted(data)
+        # print(data)
         se = pd.Series(data)
-        print(se)
-    # for span in p.items():
-    #     s = span.text()
-    #     # s = span.text()
-    #     print(s)
-    # if s.__contains__('：'):
-    # print(s[s.index('：') + 1:])
-    # data = getData()
-    # print(data)
-    # se = pd.Series(data)
-    # print(se)
+        # print(se)
+        if data.__len__() > 10:
+            list[name] = se
+# print(list)
+df = pd.DataFrame(list)
+print(df)
+# for span in p.items():
+#     s = span.text()
+#     # s = span.text()
+#     print(s)
+# if s.__contains__('：'):
+# print(s[s.index('：') + 1:])
+# data = getData()
+# print(data)
+# se = pd.Series(data)
+# print(se)
 
 # if item.attr('data-id') == '2660':
 #     print(item)
