@@ -26,13 +26,14 @@ def getData():
 
 
 # print(section)
-list = {}
-
+list1 = {}
+alist = []
+names = []
 for item in section.items():
     name = item('p')(
         '[style="padding-right: 20px;padding-left: 20px;font-size: 16px;color: inherit;border-color: rgb(166, 91, 203);"]').text()
     p = item('span')('[style="font-size: 15px;color: rgb(255, 104, 39);"]')
-    print(name)
+    # print(name)
     first = p.eq(0)
     s = first.text()
     # print(s)
@@ -44,10 +45,30 @@ for item in section.items():
         se = pd.Series(data)
         # print(se)
         if data.__len__() > 10:
-            list[name] = se
-# print(list)
-df = pd.DataFrame(list)
-print(df)
+            # alist.append(pd.DataFrame(se))
+            # names.append(name)
+            list1[name] = se
+# result = pd.concat(alist)
+# print(result)
+# print(list1)
+# items = list1.items()
+print(list1.keys())
+df = pd.DataFrame(list1)
+print(df['唐儿'])
+for i in df.items():
+    tup=pd.DataFrame(list(i))
+    alist.append(tup)
+    # print(tup)
+result=pd.concat(alist)
+# print(result)
+
+# df['合并'] = df['唐儿'] + df['诸葛孔明']
+# print(df)
+# adf = pd.DataFrame(pd.Series(items))
+#
+# a = adf.drop_duplicates(keep='first')
+# print(a)
+
 # for span in p.items():
 #     s = span.text()
 #     # s = span.text()
