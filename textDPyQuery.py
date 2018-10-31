@@ -35,8 +35,14 @@ for item in section.items():
         '[style="padding-right: 20px;padding-left: 20px;font-size: 16px;color: inherit;border-color: rgb(166, 91, 203);"]').text()
     p = item('span')('[style="font-size: 15px;color: rgb(255, 104, 39);"]')
     # print(name)
-    first = p.eq(0)
-    s = first.text()
+    length = p.__len__()
+
+    for i in range(length):
+        first = p.eq(i)
+        s = first.text()
+        if s != '':
+            break
+
     # print(s)
     if s.__contains__('：'):
         # print(s[s.index('：') + 1:])
