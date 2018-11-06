@@ -9,7 +9,7 @@ import pandas as pd
 # print(sys.getdefaultencoding())
 # file = open('zcw众彩网\\18122.html', 'w', encoding='utf-8')
 # file
-htmlf = open('111.html', 'r', encoding="utf-8")
+htmlf = open('zcw众彩网\\zcw众彩网.html', 'r', encoding="utf-8")
 htmlcont = htmlf.read()
 # print(htmlcont)
 doc = pq(htmlcont)
@@ -27,16 +27,30 @@ def getData():
 
 # print(section)
 list1 = {}
+list2 = {}
 alist = []
 names = []
 mar = []
 for item in section.items():
     name = item('p')(
         '[style="padding-right: 20px;padding-left: 20px;font-size: 16px;color: inherit;border-color: rgb(166, 91, 203);"]').text()
-    p = item('span')('[style="font-size: 15px;color: rgb(255, 104, 39);"]')
+    p = item('span')('[style="color: rgb(255, 104, 39);font-size: 15px;text-indent: 2em;"]')
+    if not p:
+        p = item('span')('[style="font-size: 15px;color: rgb(255, 104, 39);"]')
+
+    if p.length < 2:
+        p = item('p')('[style="text-indent: 2em;text-align: left;"]')
+    if not p:
+        p = item('p')
     # print(name)
-    first = p.eq(0)
-    s = first.text()
+    length = p.__len__()
+    if length == 0:
+        continue
+    for i in range(length):
+        first = p.eq(i)
+        s = first.text()
+        if s != '':
+            break
     # print(s)
     if s.__contains__('：'):
         # print(s[s.index('：') + 1:])
@@ -50,6 +64,8 @@ for item in section.items():
             # names.append(name)
             # list1[name] = se
             list1[name] = data
+            list2[name] = se
+
 # result = pd.concat(alist)
 # print(result)
 # print(list1)
@@ -63,7 +79,9 @@ from collections import Counter
 
 marCount = Counter(mar)
 marCountSort = sorted(marCount.items(), key=lambda x: x[1])
-print(marCount.__len__())
+# print(marCount.__len__())
+df = pd.DataFrame(list2)
+print(df)
 # print(keys)
 # df = pd.DataFrame(list1)
 # for key in keys:
