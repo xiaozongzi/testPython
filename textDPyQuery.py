@@ -83,7 +83,15 @@ marCountSort = sorted(marCount.items(), key=lambda x: x[1])
 # print(marCount.__len__())
 # print(keys)
 df = pd.DataFrame(list2)
-print(df)
+
+print(pd.value_counts(mar))  # 计数
+print(pd.unique(mar))  # 去除重复的值
+print(df.apply(pd.value_counts).fillna(0))  # dataframe计数
+stack = df.stack() #unstack()和次方法 逆向
+stack.index.names = ['key1', 'key2']
+stack = stack.swaplevel('key1', 'key2')
+print(stack.unstack())
+
 # for key in keys:
 #     alist.append(df[key])
 # result = pd.DataFrame(pd.concat(alist), columns=['marge'])

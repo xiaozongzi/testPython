@@ -82,6 +82,7 @@ marCountSort = sorted(marCount.items(), key=lambda x: x[1])
 # print(marCount.__len__())
 df = pd.DataFrame(list2)
 print(df)
+df.plot(use_index=True)
 # print(keys)
 # df = pd.DataFrame(list1)
 # for key in keys:
